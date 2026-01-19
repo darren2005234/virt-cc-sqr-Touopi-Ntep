@@ -17,5 +17,5 @@ conteneur dédié.
 
 ## Lancement
 ```bash
-docker build -t calculatrice-consumer .
-docker run calculatrice-consumer
+docker build -t calculatrice-consumer-darren-marie .
+docker run calculatrice-consumer-darren_marie
