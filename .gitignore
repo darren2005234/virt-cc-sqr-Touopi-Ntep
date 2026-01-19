@@ -21,3 +21,9 @@ dist/
 # IDE
 .vscode/
 .idea/
+
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+
+
