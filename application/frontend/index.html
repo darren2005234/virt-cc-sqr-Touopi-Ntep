@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>La cal perso de D&M</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="atm-frame">
+        <div class="atm">
+            <div class="screen" id="screen">
+                <p id="message">Entrez votre calcul</p>
+                <input type="text" id="input">
+            </div>
+            <hr>
+            <div class="keypad">
+                <div class="row">
+                    <button onclick="addChar('1')">1</button>
+                    <button onclick="addChar('2')">2</button>
+                    <button onclick="addChar('3')">3</button>
+                    <button onclick="addChar('/')">/</button>
+                    <button class="suppr" onclick="delChar()">Suppr.</button>
+                </div>
+                <div class="row">
+                    <button onclick="addChar('4')">4</button>
+                    <button onclick="addChar('5')">5</button>
+                    <button onclick="addChar('6')">6</button>
+                    <button onclick="addChar('x')">x</button>
+                    <button class="annuler" onclick="cancelAction()">Annuler</button>
+                </div>
+                <div class="row">
+                    <button onclick="addChar('7')">7</button>
+                    <button onclick="addChar('8')">8</button>
+                    <button onclick="addChar('9')">9</button>
+                    <button onclick="addChar('-')">-</button>
+                    <button class="valider" onclick="validateInput()">=</button>
+                </div>
+                <div class="row">
+                    <button class="zero" onclick="addChar('0')">0</button>
+                    <button onclick="addChar('.')">.</button>
+                    <button onclick="addChar('+')">+</button>
+                    <button class="rechercher" onclick="showSearch()">Rechr</button>
+
+                </div>
+            </div>
+            <!-- Ajoute juste après ton keypad -->
+            <div id="search-section" style="display:none; margin-top: 20px;">
+                <input type="text" id="search-id" placeholder="Entrez l'ID du calcul">
+                <button onclick="searchById()">Valider ID</button>
+                <p id="search-message"></p>
+            </div>
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

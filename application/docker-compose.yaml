@@ -1,0 +1,38 @@
+
+
+services:
+  backend:
+    build: ./backend
+    container_name: django_backend
+    command: gunicorn calcul_api.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+
+  celery:
+    build: ./backend
+    container_name: celery_worker
+    command: celery -A calcul_api worker -l info
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - backend
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
