@@ -1,0 +1,53 @@
+# kubernetes/backend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: darren-marie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: europe-west1-docker.pkg.dev/polytech-dijon/polytech-dijon/calculatrice-backend-darren-marie:v1
+        imagePullPolicy: Always 
+        env:
+          - name: ALLOWED_HOSTS
+            value: "calculatrice.local,backend,localhost"
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            python manage.py migrate --noinput &&
+            gunicorn --bind 0.0.0.0:8000 calcul_api.wsgi:application
+        ports:
+            - containerPort: 8000
+        env:
+            - name: CELERY_BROKER_URL
+              value: amqp://guest:guest@rabbitmq:5672//
+            - name: CELERY_RESULT_BACKEND
+              value: redis://redis:6379/0
+        resources:
+            requests:
+              cpu : "4m"
+              memory: "32Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: darren-marie
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP
