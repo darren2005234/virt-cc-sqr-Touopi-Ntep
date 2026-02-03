@@ -26,4 +26,5 @@ dist/
 *.tfstate
 *.tfstate.backup
 
-
+#clés publiques 
+application/backend/student.json
