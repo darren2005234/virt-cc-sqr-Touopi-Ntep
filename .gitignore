@@ -22,14 +22,6 @@ dist/
 .vscode/
 .idea/
 
-<<<<<<< HEAD
-# Terraform state files
-*.tfstate
-*.tfstate.backup
-
-#clés publiques 
-application/backend/student.json
-=======
 
 #clés publiques
 student.json
@@ -38,4 +30,3 @@ student.json
 
 #terrformtfstate
 terrform.tfstate
->>>>>>> marie
