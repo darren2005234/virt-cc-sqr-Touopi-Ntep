@@ -23,7 +23,10 @@ dist/
 .idea/
 
 
-#clé publique
+#clés publiques
 student.json
 **/student.json
 *.json.secret
+
+#terrformtfstate
+terrform.tfstate
