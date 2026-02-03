@@ -2,7 +2,7 @@ const input = document.getElementById("input");
 const message = document.getElementById("message");
 
 // frontend/js/app.js
-const API_URL = "http://localhost:8000/api"; // pour navigateur local
+const API_URL = "/api"; // 
 
 
 

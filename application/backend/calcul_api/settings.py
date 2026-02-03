@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-#6&^$y6%lwvkv2@295%5*sn)4(87a1%+_xgujwtv3u88!lt^&4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Autoriser l'accès depuis le nouveau domaine de l'Ingress
+ALLOWED_HOSTS = ['calculatrice-darren-marie.polytech-dijon.kiowy.net', '34.140.190.146', 'localhost', '127.0.0.1', 'backend']
+
+# Si tu utilises django-cors-headers, ajoute ceci :
+CORS_ALLOWED_ORIGINS = [
+    "http://calculatrice-darren-marie.polytech-dijon.kiowy.net",
+]
 
 
 # Application definition
@@ -50,15 +56,11 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-]
-
 
 
 ROOT_URLCONF = 'calcul_api.urls'
@@ -85,11 +87,16 @@ WSGI_APPLICATION = 'calcul_api.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "calculdb",
+        "USER": "calculuser",
+        "PASSWORD": "calculpass",
+        "HOST": "postgres",
+        "PORT": "5432",
     }
 }
+
 
 
 # Password validation
@@ -132,10 +139,28 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-CELERY_BROKER_URL = "amqp://guest:guest@rabbitmq:5672//"
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# --- Configuration Celery ---
+# On utilise Redis pour les messages (Broker) ET pour les résultats
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULT_BACKEND = "redis://redis:6379/0"
+
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_BACKEND = "django-db"
+CELERY_RESULT_SERIALIZER = "json" # Bonne pratique d'ajouter celle-ci aussi
+CELERY_RESULT_EXPIRES = 3600
+# Supprime ou commente la ligne CELERY_RESULT_BACKEND = "django-db"
+
+
 
 
 REST_FRAMEWORK = {
