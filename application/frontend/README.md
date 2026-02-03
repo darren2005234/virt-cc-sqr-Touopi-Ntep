@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-
-# Frontend – Calculatrice Cloud Native
-
-Ce dossier contient le frontend de l’application.
-
-## Description
-
-Le frontend est une interface web simple permettant :
-
-- de saisir une opération (addition, soustraction, multiplication, division)
-- d’envoyer une demande de calcul à l’API backend
-- de récupérer le résultat d’un calcul à partir de son identifiant
-
-## Technologies utilisées
-
-- HTML
-- CSS
-- JavaScript
-- Nginx
-
-## Docker
-
-Le frontend est servi via un conteneur Nginx.
-
-### Construction de l’image
-
-```bash
-docker build -t calculatrice-frontend-darren-marie .
-=======
 Frontend – Interface Utilisateur
 
 Présentation générale
@@ -143,4 +113,3 @@ simplicité de l’interface utilisateur
 Conclusion
 
 Le frontend fournit une interface claire et accessible, complétant efficacement l’architecture microservices de la calculatrice cloud native.
->>>>>>> marie

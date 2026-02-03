@@ -1,37 +1,3 @@
-<<<<<<< HEAD
-
-# Backend – API Calculatrice
-
-Ce dossier contient l’API backend de la calculatrice, développée avec Django.
-
-## Fonctionnalités
-
-L’API permet :
-
-- de recevoir une demande de calcul (POST)
-- de placer la demande dans une file RabbitMQ
-- de récupérer le résultat d’un calcul via un identifiant (GET)
-
-Les calculs sont traités de manière asynchrone.
-
-## Technologies utilisées
-
-- Python
-- Django
-- Django REST Framework
-- Celery
-- RabbitMQ
-
-## Asynchrone & File d’attente
-
-- L’API joue le rôle de **producer**
-- RabbitMQ est la **file de messages**
-- Celery est le **consumer**
-
-Les tâches sont définies dans :
-
-calculs/tasks.py
-=======
 Backend – API Calculatrice Cloud Native
 
 Présentation générale
@@ -269,4 +235,3 @@ Respect de l’architecture microservices
 Conclusion
 
 Le backend constitue le cœur fonctionnel de la Calculatrice Cloud Native. Il illustre l’utilisation conjointe d’une API REST, d’un système de messagerie et d’un stockage externe afin de proposer une application robuste, scalable et conforme aux principes du Cloud Computing moderne.
->>>>>>> marie
