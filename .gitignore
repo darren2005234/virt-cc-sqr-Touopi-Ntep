@@ -21,3 +21,9 @@ dist/
 # IDE
 .vscode/
 .idea/
+
+
+#clé publique
+student.json
+**/student.json
+*.json.secret
